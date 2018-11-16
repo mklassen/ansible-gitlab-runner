@@ -26,3 +26,7 @@
 
 - name: Configure GitLab Runner
   import_tasks: config-runners.yml
+
+- name: Install GitLab Runner Docker Cleanup
+  import_tasks: cleanup.yml
+  when: gitlab_runner_cleanup

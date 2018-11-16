@@ -94,3 +94,11 @@ gitlab_runner_runners:
     #     net.ipv4.ip_forward: "1"
 
 gitlab_runner_temp_dir: /tmp
+
+# Configuration for automatic gitlab-runner cache cleanup
+gitlab_runner_cleanup: yes
+gitlab_runner_cleanup_low_space: 10G
+gitlab_runner_cleanup_expected_space: 20G
+gitlab_runner_cleanup_low_inode: 1048576
+gitlab_runner_cleanup_expected_inode: 2097152
+gitlab_runner_cleanup_ttl: 10m
