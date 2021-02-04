@@ -1,13 +1,15 @@
 ---
-- name: Install docker-py module
+- name: Install docker module
   apt:
-    name: python-docker
+    name:
+     - python3-docker
+     - python3-distutils
     state: present
 
 # Launch the automatic cache cleanup from GitLab.org
 # https://gitlab.com/gitlab-org/gitlab-runner-docker-cleanup
 - name: Install gitlab cleanup image
-  docker_container:
+  community.general.docker_container:
     detach: yes
     env:
       LOW_FREE_SPACE: "{{gitlab_runner_cleanup_low_space}}"
@@ -15,8 +17,9 @@
       LOW_FREE_FILES_COUNT: "{{gitlab_runner_cleanup_low_inode}}"
       EXPECTED_FREE_FILES_COUNT: "{{gitlab_runner_cleanup_expected_inode}}"
       DEFAULT_TTL: "{{gitlab_runner_cleanup_ttl}}"
-      USE_DF: 1
+      USE_DF: "1"
     restart_policy: always
     docker_host: unix://var/run/docker.sock
     name: gitlab-runner-docker-cleanup
     image: quay.io/gitlab/gitlab-runner-docker-cleanup
+    container_default_behavior: compatibility
