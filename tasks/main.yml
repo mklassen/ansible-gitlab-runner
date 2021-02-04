@@ -21,3 +21,7 @@
 - name: Install GitLab Runner (Windows)
   import_tasks: Windows.yml
   when: ansible_os_family == 'Windows' and not gitlab_runner_container_install
+
+- name: Install GitLab Runner Docker Cleanup
+  import_tasks: cleanup.yml
+  when: gitlab_runner_cleanup
