@@ -48,5 +48,14 @@
     state: absent
   when: ansible_distribution_release in ["buster", "focal"]
 
+- name: (Debian) Create the missing /var/lib/gitlab-runner dirctory
+  file:
+    path: /var/lib/gitlab-runner
+    state: directory
+    owner: gitlab-runner
+    group: gitlab-runner
+    mode: 0755
+  when: ansible_distribution_release in ["focal"]
+
 - name: Set systemd reload options
   import_tasks: systemd-reload.yml
