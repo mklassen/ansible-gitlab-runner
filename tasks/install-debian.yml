@@ -110,5 +110,14 @@
     state: absent
   when: gitlab_runner_remove_bash_logout
 
+- name: "(Debian) Create the missing /var/lib/gitlab-runner directory"
+  file:
+    path: /var/lib/gitlab-runner
+    state: directory
+    owner: gitlab-runner
+    group: gitlab-runner
+    mode: 0755
+  when: ansible_facts['distribution_release'] in ["focal"]
+
 - name: "Set systemd reload options"
   ansible.builtin.import_tasks: systemd-reload.yml
