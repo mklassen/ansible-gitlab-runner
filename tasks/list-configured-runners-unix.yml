@@ -5,6 +5,7 @@
   changed_when: false
   check_mode: false
   become: "{{ gitlab_runner_system_mode }}"
+  no_log: "{{ gitlab_runner_no_log_secrets | default(omit) }}"
 
 - name: "Initialze runner list"
   ansible.builtin.set_fact:
